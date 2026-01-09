@@ -24,3 +24,9 @@ let read_char (l : lexer) : lexer =
 
 let new_lexer (input : string) : lexer =
   read_char { input; position = 0; read_position = 0; ch = None }
+
+let new_token (tt : Token.token_type) (ch : char option) : Token.token =
+  {
+    typ = tt;
+    literal = Option.fold ~none:"" ~some:(fun c -> String.make 1 c) ch;
+  }
