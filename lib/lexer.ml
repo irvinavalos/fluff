@@ -28,21 +28,20 @@ let new_token (tt : Token.token_type) (ch : char option) : Token.token =
 
 let get_char_from_char_opt ch = Option.get ch
 
-let helper (ch : char option) =
-  let c = get_char_from_char_opt ch in
-  match c with
-  | '{' -> Token.LBRACE
-  | '}' -> Token.RBRACE
-  | '(' -> Token.LPAREN
-  | ')' -> Token.RPAREN
-  | ';' -> Token.SEMICOLON
-  | ',' -> Token.COMMA
-  | '+' -> Token.PLUS
-  | '=' -> Token.ASSIGN
-  | _ -> Token.EOF
-
-let next_token_helper (ch : char option) =
-  let tt = helper ch in
+let next_token_helper ch =
+  let tt =
+    let c = get_char_from_char_opt ch in
+    match c with
+    | '{' -> Token.LBRACE
+    | '}' -> Token.RBRACE
+    | '(' -> Token.LPAREN
+    | ')' -> Token.RPAREN
+    | ';' -> Token.SEMICOLON
+    | ',' -> Token.COMMA
+    | '+' -> Token.PLUS
+    | '=' -> Token.ASSIGN
+    | _ -> Token.EOF
+  in
   new_token tt ch
 
 let next_token (l : lexer) : lexer * Token.token =
