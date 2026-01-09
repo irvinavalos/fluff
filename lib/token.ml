@@ -12,7 +12,7 @@ type token_type =
   | LBRACE
   | RBRACE
   | FUNCTION
-  | LET
+  | VAL
 
 type token = { typ : token_type; literal : string }
 
@@ -35,4 +35,4 @@ let string_of_token_type (tt : token_type) : string =
   | RBRACE -> "RBRACE"
   (* Keywords *)
   | FUNCTION -> "FUNCTION"
-  | LET -> "LET"
+  | VAL -> "VAL"
