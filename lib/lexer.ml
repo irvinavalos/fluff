@@ -50,6 +50,7 @@ let new_token (tt : Token.token_type) (ch : char option) : Token.token =
 
 let get_char_from_char_opt ch = Option.get ch
 
+(* TODO: implement read_identifier and is_letter into next_token function *)
 let next_token_helper ch =
   let tt =
     let c = get_char_from_char_opt ch in
