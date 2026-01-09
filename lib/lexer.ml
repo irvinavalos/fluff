@@ -6,21 +6,16 @@ type lexer = {
 }
 
 let read_char (l : lexer) : lexer =
-  match l.read_position with
-  | pos when pos >= 0 && pos <= String.length l.input - 1 ->
-      {
-        input = l.input;
-        position = l.read_position;
-        read_position = l.read_position + 1;
-        ch = Some l.input.[l.read_position];
-      }
-  | _ ->
-      {
-        input = l.input;
-        position = l.read_position;
-        read_position = l.read_position + 1;
-        ch = None;
-      }
+  let ch =
+    if l.read_position >= String.length l.input then None
+    else Some l.input.[l.read_position]
+  in
+  {
+    input = l.input;
+    position = l.read_position;
+    read_position = l.read_position + 1;
+    ch;
+  }
 
 let new_lexer (input : string) : lexer =
   read_char { input; position = 0; read_position = 0; ch = None }
