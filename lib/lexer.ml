@@ -72,6 +72,7 @@ let next_token_helper l =
   | "" -> new_token Token.EOF c
   | _ ->
       if is_letter c then new_token (Token.lookup_ident c) (read_identifier l)
+      else if is_digit c then new_token Token.INT (read_number l)
       else new_token Token.ILLEGAL c
 
 let next_token (l : lexer) : lexer * Token.token =
