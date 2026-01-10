@@ -1,3 +1,5 @@
+module StringMap = Map.Make (String)
+
 type token_type =
   | ILLEGAL
   | EOF
@@ -36,3 +38,9 @@ let string_of_token_type (tt : token_type) : string =
   (* Keywords *)
   | FUNCTION -> "FUNCTION"
   | VAL -> "VAL"
+
+let keywords =
+  StringMap.of_seq @@ List.to_seq [ ("fn", FUNCTION); ("val", VAL) ]
+
+let lookup_ident (ident : string) : token_type =
+  Option.fold ~none:IDENT ~some:(fun x -> x) (StringMap.find_opt ident keywords)
