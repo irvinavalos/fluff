@@ -30,6 +30,20 @@ let read_identifier (l : lexer) : string =
   let new_position = read_identifer_helper l in
   String.sub l.input old_position new_position
 
+let is_digit (ch : string) : bool = "0" <= ch && ch <= "9"
+
+let rec read_number_acc l acc =
+  if is_digit (Option.fold ~none:"" ~some:(fun x -> String.make 1 x) l.ch) then
+    read_number_acc (read_char l) (acc + 1)
+  else acc
+
+let read_number_helper l = read_number_acc l l.position
+
+let read_number (l : lexer) : string =
+  let old_position = l.position in
+  let new_position = read_number_helper l in
+  String.sub l.input old_position new_position
+
 let new_lexer (input : string) : lexer =
   read_char { input; position = 0; read_position = 0; ch = None }
 
