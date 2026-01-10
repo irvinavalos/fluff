@@ -63,6 +63,5 @@ let next_token_helper l =
       else new_token Token.ILLEGAL c
 
 let next_token (l : lexer) : lexer * Token.token =
-  let return_token = next_token_helper l in
-  let return_lexer = read_char l in
-  (return_lexer, return_token)
+  let l_after_whitespace = eat_whitespace l in
+  (read_char l_after_whitespace, next_token_helper l_after_whitespace)
