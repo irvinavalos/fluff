@@ -39,6 +39,9 @@ let string_of_token_type (tt : token_type) : string =
   | FUNCTION -> "FUNCTION"
   | VAL -> "VAL"
 
+let get_token_type (tok : token) : token_type = tok.typ
+let get_token_literal (tok : token) : string = tok.literal
+
 let keywords =
   StringMap.of_seq @@ List.to_seq [ ("fn", FUNCTION); ("val", VAL) ]
 
