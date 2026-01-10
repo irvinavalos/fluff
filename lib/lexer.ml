@@ -15,10 +15,8 @@ let read_char (l : lexer) : lexer =
        else Some l.input.[l.read_position]);
   }
 
-let is_char_valid c =
-  ("a" <= c && c <= "z") || ("A" <= c && c <= "Z") || c == "_"
-
-let is_letter (ch : string) : bool = is_char_valid ch
+let is_letter (ch : string) : bool =
+  ("a" <= ch && ch <= "z") || ("A" <= ch && ch <= "Z") || ch == "_"
 
 let rec read_identifier_acc l acc =
   if is_letter (Option.fold ~none:"" ~some:(fun x -> String.make 1 x) l.ch) then
