@@ -1,2 +1,3 @@
 (library
- (name fluff))
+ (name fluff)
+ (public_name fluff))
