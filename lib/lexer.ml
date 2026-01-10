@@ -6,15 +6,13 @@ type lexer = {
 }
 
 let read_char (l : lexer) : lexer =
-  let ch =
-    if l.read_position >= String.length l.input then None
-    else Some l.input.[l.read_position]
-  in
   {
     input = l.input;
     position = l.read_position;
     read_position = l.read_position + 1;
-    ch;
+    ch =
+      (if l.read_position >= String.length l.input then None
+       else Some l.input.[l.read_position]);
   }
 
 let is_char_valid c =
