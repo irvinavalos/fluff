@@ -40,6 +40,12 @@ let new_token (tt : Token.token_type) (ch : string) : Token.token =
 
 let get_char_from_char_opt ch = Option.get ch
 
+let rec eat_whitespace (l : lexer) : lexer =
+  let ch = get_char_from_char_opt l.ch in
+  if ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r' then
+    eat_whitespace (read_char l)
+  else l
+
 let next_token_helper l =
   let c = Option.fold ~none:"" ~some:(fun x -> String.make 1 x) l.ch in
   match c with
